@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import OpenAI from 'openai';
-import { POST } from "../checkout-sessions/route";
 
 const systemPrompt = `
 You are a flashcard creator, you take in text and create multiple flashcards from it. 

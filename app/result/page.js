@@ -1,10 +1,15 @@
-const { CircularProgress, Typography } = require("@mui/material")
-const { useEffect } = require("react")
+'use client'
+import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { Typography, Box, CircularProgress, Grid, Container } from "@mui/material";
+
 
 const ResultPage = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const session_id = searchParams.get('session_id')
+
     const [loading, setLoading] = useState(true)
     const [session, setSession] = useState(null)
     const [error, setError] = useState(null)
@@ -15,6 +20,7 @@ const ResultPage = () => {
             if(!session_id) return
             try{
                 const res = await fetch(`/api/checkout_sessions?session_id=${session_id}`)
+                console.log(session_id)
                 const sessionData = await res.json()
                 if (res.ok){
                     setSession(sessionData)
@@ -22,17 +28,18 @@ const ResultPage = () => {
                     setError(sessionData.error)
                 }
             }catch (error) {
-                setError('An error occurred while retrieving the session')
+                setError('An error occurred while retrieving the session', error)
+                console.log(error)
             }finally{
                 setLoading(false)
             }
         }
         fetchCheckoutSession()
-    },[session.id])
+    },[session_id])
 
     if (loading) {
         return (
-            <Container maxWidth="sm" sx={{textAlign: 'center', mt: 4}}>
+            <Container maxWidth='100vw' sx={{textAlign: 'center', mt: 4}}>
                 <CircularProgress/>
                 <Typography variant='h6' sx={{mt: 2}}>
                     Loading...
@@ -51,7 +58,7 @@ const ResultPage = () => {
         )
     }
     return(
-        <Container>
+        <Container maxWidth='100vw' sx={{textAlign:'center', mt:4}}>
             {session.payment_status === 'paid' ? (
                 <>
                 <Typography variant="h4">Thank you for your purchase!</Typography>
@@ -76,3 +83,5 @@ const ResultPage = () => {
         </Container>
     )
 }
+
+export default ResultPage

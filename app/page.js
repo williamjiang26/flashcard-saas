@@ -1,7 +1,9 @@
+'use client'
 import { SignedOut, UserButton, SignedIn } from "@clerk/nextjs";
 import { AppBar, Toolbar, Typography, Box, Button, Grid, Container } from "@mui/material";
 import getStripe from "./utils/get-stripe";
 import Head from 'next/head'
+
 const handleSubmit = async () => {
   const checkoutSession = await fetch('/api/checkout_sessions', {
     method: 'POST',
@@ -19,24 +21,12 @@ const handleSubmit = async () => {
   }
 }
 
-const content = (<Box>
-  
-
- 
-
- 
-
-
-</Box>
-
-);
 export default function Home() {
+
+
+
   return (
-    <Container maxWidth='lg'>
-      <Head>
-        <title>Flashcard Saas</title>
-        <meta name='description' content="Create flashcard from your text"/>
-      </Head>
+    <Container maxWidth='100vw'>
       <AppBar position='static'>
         <Toolbar>
           <Typography variant='h6' style={{flexGrow: 1}}>Flashcard Sass</Typography>
@@ -87,30 +77,41 @@ export default function Home() {
         <Typography variant="h4" component="h2" gutterBottom>Pricing</Typography>
         <Grid container spacing={4} justifyContent="center">
           {/* Pricing plans */}
-          <Grid item xs={12} md={4}>
-            <Box sx={{my:6, textAlign}}
+          <Grid item xs={12} md={6}>
+            <Box 
+             sx={{
+              p:3, 
+              border: '1px solid',
+              borderColor: 'grey.300',
+              borderRadius: 2,
+            }}
             >
-              <Typography variant='h6'>Easy Input Text</Typography>
+              <Typography variant="h5">Basic</Typography>
+              <Typography variant='h6'>$5 / month</Typography>
               <Typography>
                 {' '}
-                Simply input your text and let our software do the rest
+                Access to the most basic features
               </Typography>
+              <Button variant="contained" color='primary' sx={{mt:2}}>Choose Basic</Button>
             </Box>
-            
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant='h6'>Feature 2</Typography>
-            <Typography>
-              {' '}
-              Simply input your text and let our software do the rest
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant='h6'>Feature 3</Typography>
-            <Typography>
-              {' '}
-              Simply input your text and let our software do the rest
-            </Typography>
+          <Grid item xs={12} md={6}>
+            <Box 
+             sx={{
+              p:3, 
+              border: '1px solid',
+              borderColor: 'grey.300',
+              borderRadius: 2,
+            }}
+            >
+              <Typography variant="h5">Pro</Typography>
+              <Typography variant='h6'>$10 / month</Typography>
+              <Typography>
+                {' '}
+                Access to the most basic features
+              </Typography>
+              <Button variant="contained" color='primary' sx={{mt:2}} onClick={handleSubmit}>Choose Pro</Button>
+            </Box>
           </Grid>
         </Grid>
       </Box>
