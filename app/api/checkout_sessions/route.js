@@ -30,13 +30,14 @@ export async function POST(req){
                 },
             ],
             success_url: `${req.headers.get(
-                'origin',
+                'Referer',
             )}result?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.get(
-                'origin',
+                'Referer',
             )}result?session_id={CHECKOUT_SESSION_ID}`,
         }
         const checkoutSession = await stripe.checkout.sessions.create(params)
+        
         return NextResponse.json(checkoutSession,{
             status: 200,
         })
@@ -50,7 +51,6 @@ export async function POST(req){
 }
 
 export async function GET(req){
-    console.log('ho')
     const searchParams = req.nextUrl.searchParams
     const session_id = searchParams.get('session_id')
     try{

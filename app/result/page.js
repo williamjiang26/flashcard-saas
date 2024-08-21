@@ -6,7 +6,6 @@ import { Typography, Box, CircularProgress, Grid, Container } from "@mui/materia
 
 
 const ResultPage = () => {
-    const router = useRouter()
     const searchParams = useSearchParams()
     const session_id = searchParams.get('session_id')
 
@@ -20,7 +19,6 @@ const ResultPage = () => {
             if(!session_id) return
             try{
                 const res = await fetch(`/api/checkout_sessions?session_id=${session_id}`)
-                console.log(session_id)
                 const sessionData = await res.json()
                 if (res.ok){
                     setSession(sessionData)
@@ -58,7 +56,7 @@ const ResultPage = () => {
         )
     }
     return(
-        <Container maxWidth='100vw' sx={{textAlign:'center', mt:4}}>
+        <Box width='100vw' height='100vh' sx={{textAlign:'center', mt:4}}>
             {session.payment_status === 'paid' ? (
                 <>
                 <Typography variant="h4">Thank you for your purchase!</Typography>
@@ -80,7 +78,7 @@ const ResultPage = () => {
                     </Box>
                 </>
             )}
-        </Container>
+        </Box>
     )
 }
 

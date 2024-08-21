@@ -1,8 +1,8 @@
 'use client'
 import { SignedOut, UserButton, SignedIn } from "@clerk/nextjs";
-import { AppBar, Toolbar, Typography, Box, Button, Grid, Container } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Button, Grid, Container, MenuItem } from "@mui/material";
 import getStripe from "./utils/get-stripe";
-import Head from 'next/head'
+
 
 const handleSubmit = async () => {
   const checkoutSession = await fetch('/api/checkout_sessions', {
@@ -22,14 +22,12 @@ const handleSubmit = async () => {
 }
 
 export default function Home() {
-
-
-
   return (
     <Container maxWidth='100vw'>
       <AppBar position='static'>
         <Toolbar>
           <Typography variant='h6' style={{flexGrow: 1}}>Flashcard Sass</Typography>
+          <Button color='inherit' href='/flashcards'>Flashcards</Button>
           <SignedOut>
             <Button color='inherit' href='/sign-in'>Login</Button>
             <Button color='inherit' href='/sign-up'>Sign Up</Button>
@@ -92,7 +90,7 @@ export default function Home() {
                 {' '}
                 Access to the most basic features
               </Typography>
-              <Button variant="contained" color='primary' sx={{mt:2}}>Choose Basic</Button>
+              <Button variant="contained" color='primary' sx={{mt:2}} onClick={handleSubmit}>Choose Basic</Button>
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>

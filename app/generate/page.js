@@ -1,7 +1,6 @@
 'use client'
 import { useState } from "react"
 import {
-    Container,
     Grid,
     Card,
     TextField,
@@ -105,7 +104,7 @@ export default function Generate() {
 
 
     return(
-        <Container maxWidth='md'>
+        <Box height='100vh'>
             <Box sx={{ my: 4 }}>
                 <Typography variant="h4" component='h1' gutterBottom>
                     Generate Flashcards
@@ -221,7 +220,6 @@ export default function Generate() {
                     <Button onClick={saveFlashcards} color='secondary'>Save</Button>
                 </DialogActions>
             </Dialog>
-
-        </Container>
+        </Box>
     )
 }
