@@ -27,12 +27,12 @@ export default function Home() {
       <AppBar position='static'>
         <Toolbar>
           <Typography variant='h6' style={{flexGrow: 1}}>Flashcard Sass</Typography>
-          <Button color='inherit' href='/flashcards'>Flashcards</Button>
           <SignedOut>
             <Button color='inherit' href='/sign-in'>Login</Button>
             <Button color='inherit' href='/sign-up'>Sign Up</Button>
           </SignedOut>
           <SignedIn>
+          <Button color='inherit' href='/flashcards'>Flashcards</Button>
             <UserButton/>
           </SignedIn>
         </Toolbar>

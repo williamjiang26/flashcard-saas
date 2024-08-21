@@ -7,7 +7,7 @@ import { SignIn } from "@clerk/nextjs";
 export default function SignUpPage(){
 
     return (
-        <Container maxWidth='sm'>
+        <Box height='100vh'>
             <AppBar position="static" sx={{backgroundColor: '#3f51b5'}}>
                 <Toolbar>
                 <Typography variant="h6" sx={{flexGrow: 1}}>
@@ -37,6 +37,6 @@ export default function SignUpPage(){
                 <Typography variant="h4" component="h1" gutterBottom>Sign In</Typography>
                 <SignIn />
             </Box>
-        </Container>
+        </Box>
     )  
 }
