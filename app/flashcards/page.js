@@ -6,6 +6,7 @@ import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { useSearchParams, useRouter  } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import Topbar from "../topbar/page";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 export default function Flashcards() {
@@ -46,7 +47,7 @@ export default function Flashcards() {
              <Grid container spacing={2} sx={{mt:4}}>
                  {flashcards.map((flashcard, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}> 
-                    <Card>
+                    <Card sx={{display:'flex', alignItems:'center', justifyContent:'space-evenly'}}>
                         <CardActionArea
                         onClick={() => handleCardClick(flashcard.setName)}
                         >
@@ -54,6 +55,7 @@ export default function Flashcards() {
                                   <Typography variant='h6'>{flashcard.setName}</Typography>  
                             </CardContent>
                         </CardActionArea>
+                        
                     </Card>
                     </Grid>
                 ))}   

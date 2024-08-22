@@ -22,15 +22,18 @@ const handleSubmit = async () => {
 
 export default function Home() {
   return (
-    <Container maxWidth='100vw'>
+    <Box>
       <Topbar/>
-      <Box sx={{textAlign: 'center'}}>
+      {/* intro page */}
+      <Box sx={{textAlign: 'center', alignContent:'center'}} height='100vh'>
         <Typography variant="h2" component="h1" gutterBottom>Welcome to Flashcard Sass</Typography>
         <Typography variant="h5" component="h2" gutterBottom>Easiest way to create your flashcards</Typography>
         <Button variant='contained' color='primary' sx={{mt: 2, mr: 2}} href='/generate'>Get Started</Button>
         <Button variant="outlined" color="primary" sx={{mt: 2}}>Learn more</Button>
       </Box>
-      <Box sx={{my: 6, textAlign: 'center'}}>
+
+      {/* features page */}
+      <Box sx={{my: 6, textAlign: 'center', alignContent:'center'}} height='100vh'>
         <Typography variant="h4" component="h2" gutterBottom>Features</Typography>
         <Grid container spacing={4}>
           {/* Feature items */}
@@ -58,7 +61,8 @@ export default function Home() {
         </Grid>
       </Box>
 
-      <Box sx={{my: 6, textAlign: 'center'}}>
+      {/* pricing page */}
+      <Box sx={{my: 6, textAlign: 'center',alignContent:'center'}} height='100vh'>
         <Typography variant="h4" component="h2" gutterBottom>Pricing</Typography>
         <Grid container spacing={4} justifyContent="center">
           {/* Pricing plans */}
@@ -100,6 +104,6 @@ export default function Home() {
           </Grid>
         </Grid>
       </Box>
-    </Container>
+    </Box>
   )
 }

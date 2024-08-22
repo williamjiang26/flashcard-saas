@@ -65,20 +65,21 @@ export default function Flashcard(){
         <Box height='100vh' width='100vw'>
             <Topbar/>
             <Box m='20px'>
-            <Grid container sx={{mt:4}}>
-            <Box sx={{ display: 'flex', justifyItems: 'space-between' }}>
+                <Box sx={{ display: 'flex', justifyItems: 'space-between' }}>
                 <Typography variant="h4">
                     Flashcards Preview:
-                </Typography>   
+                </Typography>
                 <Typography
                     component="span"
                     variant="h4"
-                    sx={{ color: 'blue', textDecoration: 'italic' }}
+                    sx={{ color: 'blue'}}
                 >
                     {search}
                 </Typography>
-                
             </Box>
+                
+            <Grid container sx={{mt:4}}>
+            
                     <Grid container spacing={2}>
                         {flashcards.map((flashcard, index) => (
                             <Grid item xs={12} sm={6} md={4} key={index}> 

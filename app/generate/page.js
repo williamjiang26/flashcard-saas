@@ -18,7 +18,7 @@ import {
     DialogActions,
     CardActionArea,
 } from "@mui/material";
-
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { doc, getDoc, writeBatch, setDoc, collection} from "firebase/firestore"
 import {db} from '@/firebase'
 import { useRouter } from "next/navigation"
@@ -121,9 +121,9 @@ export default function Generate() {
     return(
         <Box height='100vh'>
             <Topbar/>
-            <Box sx={{ my: 4 }}>
+            <Box sx={{ my: 4, m:'20px' }} >
                 <Typography variant="h4" component='h1' gutterBottom>
-                    Generate Flashcards
+                    Generate <AutoAwesomeIcon sx={{color:"white"}}/>
                 </Typography>
                 <TextField 
                 value={text}
@@ -143,13 +143,6 @@ export default function Generate() {
                 >
                     Generate Flashcards
                 </Button>
-                {flashcards.length > 0 && (
-                    <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center'}}>
-                        <Button variant="contained" color='primary' onClick={handleOpen}>
-                            Save Flashcards
-                        </Button>
-                    </Box>
-                )}
             </Box>
             
             {loading ? (
@@ -164,9 +157,9 @@ export default function Generate() {
 
             {/* flashcard rendering */}
             {flashcards.length > 0 && (
-                <Box sx={{ mt: 4 }}>
+                <Box sx={{ mt: 4, m:'20px'}}>
                     <Typography variant="h5" component='h2' gutterBottom>
-                        Flashcards Preview
+                        Flashcards Preview:
                     </Typography>
                     <Grid container spacing={2}>
                         {flashcards.map((flashcard, index) => (
@@ -220,8 +213,12 @@ export default function Generate() {
                             </Grid>
                         ))}
                     </Grid>
-                    <Box>
-                        <Button variant="contained" color='secondary' onClick={handleOpen}>Save</Button>
+                    <Box mt='10px' mb='10px'>
+                    {flashcards.length > 0 && (
+                        <Button variant="contained" color='primary' fullWidth onClick={handleOpen}>
+                            Save Flashcards
+                        </Button>
+                    )}
                     </Box>
                 </Box>
             )}

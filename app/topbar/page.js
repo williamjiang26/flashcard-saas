@@ -1,6 +1,7 @@
 import {AppBar,Box, Toolbar, Typography, Button } from "@mui/material"
 import { SignedOut, UserButton, SignedIn } from "@clerk/nextjs";
 import FolderIcon from '@mui/icons-material/Folder';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 const Topbar = () => {
     return (
     <AppBar position='static'>
@@ -18,8 +19,11 @@ const Topbar = () => {
                 <Button color='inherit' href='/sign-up'>Sign Up</Button>
             </SignedOut>
             <SignedIn>
-            <Button color='inherit' href='/flashcards'><FolderIcon fontSize="large"/></Button>
-                <UserButton/>
+            <Box>
+                <Button color='inherit' href='/generate'><AutoAwesomeIcon fontSize="medium"/></Button>
+                <Button color='inherit' href='/flashcards'><FolderIcon fontSize="medium"/></Button>  
+            </Box>
+            <UserButton/>
             </SignedIn>
         </Box>
         
