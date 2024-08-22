@@ -2,10 +2,10 @@
 import { useState } from "react"
 import {
     Grid,
+    Alert,
     Card,
     CircularProgress,
     TextField,
-    Alert,
     Box,
     Button,
     Typography,
@@ -18,12 +18,15 @@ import {
     DialogActions,
     CardActionArea,
 } from "@mui/material";
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+
+import AutoAwesome from "@mui/icons-material/AutoAwesome";
+import CheckIcon from '@mui/icons-material/Check';
 import { doc, getDoc, writeBatch, setDoc, collection} from "firebase/firestore"
 import {db} from '@/firebase'
 import { useRouter } from "next/navigation"
 import { useUser } from "@clerk/nextjs";
 import Topbar from "../topbar/page";
+
 export default function Generate() {
     const [text, setText] = useState('')
     const [flashcards, setFlashcards] = useState([])
@@ -64,15 +67,6 @@ export default function Generate() {
         }))
     }
 
-    function SimpleAlert() {
-        return (
-          <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-            Flashcards was saved successfully!
-          </Alert>
-        );
-    }
-
-
     // First, let’s add a state for the flashcard set name and the dialog open state:
     const [setName, setSetName] = useState('')
     const [dialogOpen, setDialogOpen] = useState(false)
@@ -111,20 +105,29 @@ export default function Generate() {
         })
         
         await batch.commit()
-        SimpleAlert()
+        alert('Flashcards saved successfully')
         handleClose()
         router.push('/flashcards')
     
+    }
+    function SimpleAlert() {
+        return (
+          <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+            Here is a gentle confirmation that your action was successful.
+          </Alert>
+        );
     }
 
 
     return(
         <Box height='100vh'>
+            
             <Topbar/>
             <Box sx={{ my: 4, m:'20px' }} >
                 <Typography variant="h4" component='h1' gutterBottom>
-                    Generate <AutoAwesomeIcon sx={{color:"white"}}/>
+                    Generate <AutoAwesome sx={{color:"white"}}/>
                 </Typography>
+                
                 <TextField 
                 value={text}
                 onChange={(e) => setText(e.target.value)}
