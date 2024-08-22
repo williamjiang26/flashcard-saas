@@ -3,32 +3,37 @@ import { useState } from "react"
 import {
     Grid,
     Card,
+    CircularProgress,
     TextField,
+    Alert,
     Box,
     Button,
     Typography,
     CardContent,
+    Container,
     Dialog,
     DialogTitle,
     DialogContent,
     DialogContentText,
     DialogActions,
-    CardActionArea
+    CardActionArea,
 } from "@mui/material";
 
 import { doc, getDoc, writeBatch, setDoc, collection} from "firebase/firestore"
 import {db} from '@/firebase'
 import { useRouter } from "next/navigation"
 import { useUser } from "@clerk/nextjs";
-
+import Topbar from "../topbar/page";
 export default function Generate() {
     const [text, setText] = useState('')
     const [flashcards, setFlashcards] = useState([])
     const [flipped, setFlipped] = useState({})
     const { isLoaded, isSignedIn, user } = useUser()
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     const handleSubmit = async() => {
+        setLoading(true)
         if(!text.trim()){
             alert('Please enter some text to generate flashcards')
             return
@@ -45,6 +50,7 @@ export default function Generate() {
 
             const data = await response.json()
             setFlashcards(data)
+            setLoading(false)
         } catch (error){
             console.error('Error generating flashcards:', error)
             alert('An error occurred generating flashcards. Please try again')
@@ -57,6 +63,15 @@ export default function Generate() {
             [id]: !prev[id],
         }))
     }
+
+    function SimpleAlert() {
+        return (
+          <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+            Flashcards was saved successfully!
+          </Alert>
+        );
+    }
+
 
     // First, let’s add a state for the flashcard set name and the dialog open state:
     const [setName, setSetName] = useState('')
@@ -94,9 +109,9 @@ export default function Generate() {
             const cardDocRef = doc(colRef)
             batch.set(cardDocRef, flashcard)
         })
-
+        
         await batch.commit()
-        alert('Flashcards saved successfully!')
+        SimpleAlert()
         handleClose()
         router.push('/flashcards')
     
@@ -105,6 +120,7 @@ export default function Generate() {
 
     return(
         <Box height='100vh'>
+            <Topbar/>
             <Box sx={{ my: 4 }}>
                 <Typography variant="h4" component='h1' gutterBottom>
                     Generate Flashcards
@@ -135,6 +151,17 @@ export default function Generate() {
                     </Box>
                 )}
             </Box>
+            
+            {loading ? (
+                <Container maxWidth='100vw' sx={{textAlign: 'center', mt: 4}}>
+                    <CircularProgress/>
+                    <Typography variant='h6' sx={{mt: 2}}>
+                        Loading...
+                    </Typography>
+                </Container>
+            ) : undefined}
+
+
             {/* flashcard rendering */}
             {flashcards.length > 0 && (
                 <Box sx={{ mt: 4 }}>
@@ -198,6 +225,7 @@ export default function Generate() {
                     </Box>
                 </Box>
             )}
+            
             {/* dailog component */}
             <Dialog open={dialogOpen} onClose={handleClose}>
                 <DialogTitle>Save Flashcard Set</DialogTitle>

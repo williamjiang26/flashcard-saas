@@ -1,11 +1,12 @@
 'use client'
 import { useUser } from "@clerk/nextjs"
 import { useEffect, useState } from "react"
-import { collection, doc, getDoc, getDocs } from "firebase/firestore"
+import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore"
 import {db} from '@/firebase'
 import { useSearchParams  } from "next/navigation";
 import {
     Container,
+    Button,
     Grid,
     Card,
     Box,
@@ -13,6 +14,7 @@ import {
     CardContent,
     CardActionArea
 } from "@mui/material";
+import Topbar from "../topbar/page"
 
 export default function Flashcard(){
     const [flashcards, setFlashcards] = useState([])
@@ -47,10 +49,36 @@ export default function Flashcard(){
         return (<></>)
     }
 
+    const handleDelete = async () => {
+        const colRef = collection(doc(collection(db, 'users'), user.id),search)
+        const docs = await getDocs(colRef)
+        // const flashcards = []
+        // docs.forEach((doc) => {
+        //     flashcards.push({id: doc.id, ...doc.data()})
+        // })
+        console.log(docs)
+        
+        
+    }
+
     return(
         <Box height='100vh' width='100vw'>
+            <Topbar/>
+            <Box m='20px'>
             <Grid container sx={{mt:4}}>
-            <Typography variant="h4">Flashcards Preview: {search}</Typography>
+            <Box sx={{ display: 'flex', justifyItems: 'space-between' }}>
+                <Typography variant="h4">
+                    Flashcards Preview:
+                </Typography>   
+                <Typography
+                    component="span"
+                    variant="h4"
+                    sx={{ color: 'blue', textDecoration: 'italic' }}
+                >
+                    {search}
+                </Typography>
+                
+            </Box>
                     <Grid container spacing={2}>
                         {flashcards.map((flashcard, index) => (
                             <Grid item xs={12} sm={6} md={4} key={index}> 
@@ -103,6 +131,8 @@ export default function Flashcard(){
                         ))}
                     </Grid>
             </Grid>
+            </Box>
+            
         </Box>
     )
 }

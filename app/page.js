@@ -1,8 +1,7 @@
 'use client'
-import { SignedOut, UserButton, SignedIn } from "@clerk/nextjs";
-import { AppBar, Toolbar, Typography, Box, Button, Grid, Container, MenuItem } from "@mui/material";
+import { Typography, Box, Button, Grid, Container, MenuItem } from "@mui/material";
 import getStripe from "./utils/get-stripe";
-
+import Topbar from "./topbar/page";
 
 const handleSubmit = async () => {
   const checkoutSession = await fetch('/api/checkout_sessions', {
@@ -24,19 +23,7 @@ const handleSubmit = async () => {
 export default function Home() {
   return (
     <Container maxWidth='100vw'>
-      <AppBar position='static'>
-        <Toolbar>
-          <Typography variant='h6' style={{flexGrow: 1}}>Flashcard Sass</Typography>
-          <SignedOut>
-            <Button color='inherit' href='/sign-in'>Login</Button>
-            <Button color='inherit' href='/sign-up'>Sign Up</Button>
-          </SignedOut>
-          <SignedIn>
-          <Button color='inherit' href='/flashcards'>Flashcards</Button>
-            <UserButton/>
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
+      <Topbar/>
       <Box sx={{textAlign: 'center'}}>
         <Typography variant="h2" component="h1" gutterBottom>Welcome to Flashcard Sass</Typography>
         <Typography variant="h5" component="h2" gutterBottom>Easiest way to create your flashcards</Typography>
