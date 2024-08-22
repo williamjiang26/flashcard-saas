@@ -2,6 +2,7 @@
 import { Typography, Box, Button, Grid, Container, MenuItem } from "@mui/material";
 import getStripe from "./utils/get-stripe";
 import Topbar from "./topbar/page";
+import { useUser } from "@clerk/nextjs";
 
 const handleSubmit = async () => {
   const checkoutSession = await fetch('/api/checkout_sessions', {
@@ -21,6 +22,8 @@ const handleSubmit = async () => {
 }
 
 export default function Home() {
+  const { isLoaded, isSignedIn, user } = useUser()
+
   return (
     <Box>
       <Topbar/>
@@ -28,8 +31,18 @@ export default function Home() {
       <Box sx={{textAlign: 'center', alignContent:'center'}} height='100vh'>
         <Typography variant="h2" component="h1" gutterBottom>Welcome to Flashcard Sass</Typography>
         <Typography variant="h5" component="h2" gutterBottom>Easiest way to create your flashcards</Typography>
-        <Button variant='contained' color='primary' sx={{mt: 2, mr: 2}} href='/generate'>Get Started</Button>
+        {console.log(isSignedIn)}
+        
+        <Button 
+        variant="contained" 
+        color="primary" 
+        sx={{ mt: 2, mr: 2 }}
+        href={isSignedIn ? "/generate" : "/sign-in"}
+        >
+          Get Started
+        </Button>
         <Button variant="outlined" color="primary" sx={{mt: 2}}>Learn more</Button>
+
       </Box>
 
       {/* features page */}

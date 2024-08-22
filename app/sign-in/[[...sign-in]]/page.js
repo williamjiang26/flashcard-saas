@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SignIn } from "@clerk/nextjs";
 
 
-export default function SignUpPage(){
+export default function SignInPage(){
 
     return (
         <Box height='100vh'>
