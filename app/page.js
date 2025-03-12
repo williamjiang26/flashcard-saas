@@ -40,7 +40,7 @@ export default function Home() {
           Welcome to Flashcard Sass
         </Typography>
         <Typography variant="h5" component="h2" gutterBottom>
-          Easiest way to create your flashcards
+          Easiest way to create your flashcards !
         </Typography>
         {console.log(isSignedIn)}
 
