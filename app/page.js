@@ -7,15 +7,14 @@ import {
   Container,
   Card,
   MenuItem,
+  CircularProgress,
 } from "@mui/material";
 import getStripe from "./utils/get-stripe";
 import Topbar from "./topbar/page";
 import { useUser } from "@clerk/nextjs";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import EditIcon from "@mui/icons-material/Edit";
-import SaveIcon from "@mui/icons-material/Save"
-
-
+import SaveIcon from "@mui/icons-material/Save";
 
 const handleSubmit = async () => {
   const checkoutSession = await fetch("/api/checkout_sessions", {
@@ -36,7 +35,13 @@ const handleSubmit = async () => {
 
 export default function Home() {
   const { isLoaded, isSignedIn, user } = useUser();
-
+  if (!isLoaded) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+        <CircularProgress />  
+      </Box>
+    );
+  }
   return (
     <Box>
       <Topbar />
@@ -139,7 +144,11 @@ export default function Home() {
                     {plan.price}
                   </Typography>
                   <Typography sx={{ mb: 3 }}>{plan.desc}</Typography>
-                  <Button variant="contained" color="primary" onClick={handleSubmit}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                  >
                     Choose {plan.title}
                   </Button>
                 </Card>
