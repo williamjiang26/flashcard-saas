@@ -38,9 +38,10 @@ export default function Generate() {
   const [flashcards, setFlashcards] = useState([]);
   const [flipped, setFlipped] = useState({});
   const { isLoaded, isSignedIn, user } = useUser();
-
-  console.log("🚀 ~ Generate ~ user:", user);
-
+  if (!isLoaded || !isSignedIn) {
+    return <></>;
+  }
+  //
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
