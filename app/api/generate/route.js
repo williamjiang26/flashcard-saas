@@ -21,6 +21,7 @@ The back should be the answer to the question.
 `;
 
 export async function POST(req) {
+  console.log("Key exists:", !!process.env.OPENROUTER_API_KEY);
   const openai = new OpenAI({
     baseURL: "https://openrouter.ai/api/v1",
     apiKey: process.env.OPENROUTER_API_KEY,
@@ -34,7 +35,6 @@ export async function POST(req) {
     model: "liquid/lfm-2.5-1.2b-thinking:free",
     response_format: { type: "json_object" },
   });
-  console.log("🚀 ~ POST ~ completion:", completion)
 
   const flashcards = JSON.parse(completion.choices[0].message.content);
 
