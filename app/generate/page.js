@@ -38,13 +38,8 @@ export default function Generate() {
   const [flashcards, setFlashcards] = useState([]);
   const [flipped, setFlipped] = useState({});
   const { isLoaded, isSignedIn, user } = useUser();
-  if (!isLoaded || !isSignedIn) {
-    return <></>;
-  }
-  //
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   const handleSubmit = async () => {
     setLoading(true);
     if (!text.trim()) {
@@ -70,14 +65,12 @@ export default function Generate() {
       alert("An error occurred generating flashcards. Please try again");
     }
   };
-
   const handleCardClick = (id) => {
     setFlipped((prev) => ({
       ...prev,
       [id]: !prev[id],
     }));
   };
-
   // First, let’s add a state for the flashcard set name and the dialog open state:
   const [setName, setSetName] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -128,7 +121,10 @@ export default function Generate() {
   //       </Alert>
   //     );
   //   }
-
+  
+  if (!isLoaded || !isSignedIn) {
+    return <></>;
+  }
   return (
     <Box height="100vh">
       <Topbar />
