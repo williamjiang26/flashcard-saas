@@ -1,20 +1,45 @@
-# AI Flashcards
-A study tool that allows you to generate flashcard sets on custom topic
+# Flashcard Saas
 
-# Goals:
-Engineer a full-stack application with a modern UI and a backend to handle flashcard generation. Store flashcards in a database and have flashcard sets saved according to user logins. 
+## Goal
 
+**Flashcard Saas** is a AI powered study tool that generates flashcards on custom topics instantly. Learn new topics and study more conveniently.
 
-# Features:
-- signup/login
-- auto generate flashcard sets
-- edit flashcard content
-- save sets to folder
+## Tech Stack
 
-# Built using
-Frontend:
+- **Frontend:**
+  - React
+  - Next.js
+  - Material UI
+  - TypeScript
+  - HTML/CSS
 
-Backend:
+- **Backend:**
+  - Node.js (Javascript)
+  - Express.js
+  - OpenRouter API
+  - Firebase
+  - REST API
 
-Libraries:
+- **CI/CD and Auth:**
+  - Vercel
+  - Clerk
+  - GitHub Actions
+
+## Data Models
+```javascript
+{
+  "user": str,
+  "flashcard sets": [
+    {
+      "subject": str,
+      "flashcards": [
+        {
+            "question": str,
+            "answer": str
+        }
+      ]
+    }
+  ]
+}
+```
 
