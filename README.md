@@ -7,6 +7,7 @@
 ## Tech Stack
 
 - **Frontend:**
+
   - React
   - Next.js
   - Material UI
@@ -14,6 +15,7 @@
   - HTML/CSS
 
 - **Backend:**
+
   - Node.js (Javascript)
   - Express.js
   - OpenRouter API
@@ -26,6 +28,7 @@
   - GitHub Actions
 
 ## Data Models
+
 ```javascript
 {
   "user": str,
@@ -42,4 +45,3 @@
   ]
 }
 ```
-
